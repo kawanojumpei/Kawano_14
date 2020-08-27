@@ -1,0 +1,114 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+    background-color: pink;
+}
+header{
+    background-color:pink;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+main{
+    border-bottom:1px solid #ccc;
+}
+.title{
+    font-size: 40px;
+    margin-left: 50px;
+}
+
+div#before_photo{
+    display: flex;
+    justify-content: center;
+}
+
+img#photo_change{
+    width: 500px;
+    height: 550px;
+}
+
+h1.question {
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
+.question{
+    font-size: 30px;
+}
+
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: gray;
+}
+
+ul.Quiz{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:70%;
+    margin-left: 50px;
+}
+
+ul.calculation{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:flex;
+    width:200px;
+}
+
+
+li#love{
+    text-align: center;
+    border: 1px solid #666;
+    background-color: #FFF;
+    width:200px;
+}
+
+.calculation_box{
+    display: flex;
+    justify-content: center;
+}
+
+.love_check{
+    margin-left:50px;
+    font-size: 40px;
+}
+
+#love_label_contents{
+    text-align: center;
+}
+
+li.love:hover{
+    color:black;
+}
+
+h1#love_label_contents {
+    margin: auto;
+}

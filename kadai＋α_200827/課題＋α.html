@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>新体感恋愛シミュレーションゲーム</title>
+</head>
+<body>
+
+<header>
+  <h1>Love's Academy</h1>
+</header>
+
+<main>
+  <h1 class="title">相手を選択しよう</h1>
+  <ul>
+    <li id="kanna_btn">橋本環奈</li>
+    <li id="mio_btn">今田美桜</li>
+    <li id="daisuke_btn">山崎大助</li>
+  </ul>
+  <div id="before_photo">
+    <img id="photo_change" src="img/silhouette.png" alt="">
+  </div>
+  <div class="question_box">
+    <h1 class="question">では<span id="name">○○○○</span>さんのことをどれだけ知っているかアピールしましょう～💛
+    </h1>
+  </div>
+  <h1 class="question">Q1：<span id="name2">○○○○</span>さんの好きなものは？
+  </h1>
+  <ul class="Quiz">
+    <li id="kanna_q1">漫画</li>
+    <li id="mio_q1">みそ味のもつ鍋</li>
+    <li id="daisuke_q1">ジーズアカデミー</li>
+  </ul>
+  
+  <h1 class="question">Q2：<span id="name3">○○○○</span>さんのハマっていることは？
+  </h1>
+  <ul class="Quiz">
+    <li id="mio_q2">語学勉強</li>
+    <li id="daisuke_q2">ジーズアカデミー</li>
+    <li id="kanna_q2">ゴルフ</li>
+  </ul>
+
+  <h1 class="question">Q3：<span id="name4">○○○○</span>さんの生きがいは？
+  </h1>
+  
+  <ul class="Quiz">
+    <li id="daisuke_q3">ジーズアカデミー</li>
+    <li id="kanna_q3">芝居で人を喜ばせる</li>
+    <li id="mio_q3">芝居で人を感動させる</li>
+  </ul>
+  <h1 class="love_check">あなたの好感度は？</h1>
+  <h1 id="love_label_contents"></h1>
+  <div class="calculation_box">
+  <ul class="calculation">
+    <li id="love"><span id="outcome"></span>%
+  </ul>
+  </div>
+
+</main>
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+
+// 橋本環奈の表示
+$("#kanna_btn").on("click",function(){    
+        $("#photo_change").attr('src',"img/kanna.jpg");
+        $("#name").html("橋本環奈")
+        $("#name2").html("橋本環奈")
+        $("#name3").html("橋本環奈")
+        $("#name4").html("橋本環奈")
+}); 
+
+$("#kanna_q1").on("click",function(){
+  num1 = 30
+  $("#outcome").html(num1);
+});
+
+$("#kanna_q2").on("click",function(){
+  num2 = 30
+  $("#outcome").html(num1 + num2);
+});
+
+$("#kanna_q3").on("click",function(){
+  num3 = 40
+  $("#outcome").html(num1 + num2 + num3);
+  if(num1 + num2 + num3==100){
+    $("#love_label_contents").html("おめでとうございます！恋人です！");
+  }
+});
+
+// 今田美桜の表示
+$("#mio_btn").on("click",function(){    
+        $("#photo_change").attr('src',"img/mio.jpg");
+        $("#name").html("今田美桜")
+        $("#name2").html("今田美桜")
+        $("#name3").html("今田美桜")
+        $("#name4").html("今田美桜")
+}); 
+
+$("#mio_q1").on("click",function(){
+  num1 = 30
+  $("#outcome").html(num1);
+});
+
+$("#mio_q2").on("click",function(){
+  num2 = 30
+  $("#outcome").html(num1 + num2);
+});
+
+$("#mio_q3").on("click",function(){
+  num3 = 40
+  $("#outcome").html(num1 + num2 + num3);
+  if(num1 + num2 + num3==100){
+    $("#love_label_contents").html("おめでとうございます！恋人です！");
+  }
+});
+
+// 山崎大助の表示
+$("#daisuke_btn").on("click",function(){    
+        $("#photo_change").attr('src',"img/daisuke.jpg");
+        $("#name").html("山崎大助")
+        $("#name").html("山崎大助")
+        $("#name2").html("山崎大助")
+        $("#name3").html("山崎大助")
+        $("#name4").html("山崎大助")
+}); 
+
+
+$("#daisuke_q1").on("click",function(){
+  num1 = 30
+  $("#outcome").html(num1);
+});
+
+
+$("#daisuke_q2").on("click",function(){
+  num2 = 30
+  $("#outcome").html(num1 + num2);
+});
+
+$("#daisuke_q3").on("click",function(){
+  num3 = 40
+  $("#outcome").html(num1 + num2 + num3);
+  if(num1 + num2 + num3==100){
+    $("#love_label_contents").html("おめでとうございます！恋人です！");
+  }
+});
+    
+</script>
+</body>
+</html>
