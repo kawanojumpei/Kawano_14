@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>恋愛ゲーム「環奈と過ごす熱い夏」</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<div id="image-text">
+  <div id= "field">
+    <ul id= "chat-ul"></ul>
+  </div>
+</div>
+  <div id= "input-field">
+    <input type="button" value="開始する" id="go" >
+    <input type= "text" id= "chat-input">
+    <input type= "button" value= "送信" id= "chat-button" onclick= "btnFunc()">
+  </div>
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // const ref = firebase.database().ref();
+  
+  const chat = [
+    "おはよう！<br>今日からまた学校再開だね！",
+    "ぺいくんは楽しい夏休み過ごせた？",
+    "私は昨日もジーズアカデミーに行ってコード書きまくってたよ❤️",
+    [['それは楽しそうだね！'],['コード書かなきゃダメだよ！'],['コード書いたの偉い！']]
+  ];
+
+  $("#chat-button").on("click",function(){
+    $("#chat-ul").append(chat[0]);
+    chat.shift();
+  });
+
+  let chatCount = 0;
+
+  // 画面への出力
+  // valはメッセージ内容，personは誰が話しているか
+  function output(val, person) {
+    // 一番下までスクロール
+    const field = document.getElementById('field');
+    field.scroll(0, field.scrollHeight - field.clientHeight);
+    const ul = document.getElementById('chat-ul');
+    const li = document.createElement('li');
+    // このdivにテキストを指定
+    const div = document.createElement('div');
+    div.textContent = val;
+    
+    if (person === 'me') { // 自分
+        div.classList.add('chat-right');
+        li.classList.add('right');
+        ul.appendChild(li);
+        li.appendChild(div);
+    }else if (person === 'other') { // 相手
+        // 相手が2個連続で返信してくる時、その間は返信不可にする
+        // なぜなら、自分の返信を複数受け取ったことになり、その全てに返信してきてしまうから
+        // 例："Hi!〇〇!"を複数など
+        // （今回の相手の連続返信は2個以内とする）
+        chatBtn.disabled = true;
+        setTimeout( ()=> {
+            chatBtn.disabled = false;
+            li.classList.add('left');
+            div.classList.add('chat-left');
+            ul.appendChild(li);
+            li.appendChild(div);
+            // 相手のトークの合計数に1足す
+            chatCount++;
+        }, 2000); 
+    }
+}
+
+const chatBtn = document.getElementById('chat-button');
+const inputText = document.getElementById('chat-input');
+
+
+// 送信ボタンを押した時の処理
+function btnFunc() {
+    if (!inputText.value) return false;
+    // 自分のテキストを送信
+    output(inputText.value, 'me');
+  
+    setTimeout( ()=> {
+        // 入力内を空欄にする
+        // 一瞬の間でvalueを取得し、相手の"Hi!〇〇!"の返信に利用
+        // 送信ボタンを押した瞬間にvalueを消したら、やまびこに失敗した
+        inputText.value = '';
+    }, 1);
+  
+    //相手の送信の合計回数に応じて次の返信を指定
+    switch(chatCount) {
+        // もし相手のトーク数が2個の時に送信ボタンが押されたら、
+        // 名前のやまびこと、chat配列の2（3個目）が返信
+        case 2:
+            output('Hi, ' + inputText.value + ' !', 'other');
+            setTimeout( ()=> {
+                output(chat[2], 'other');
+            }, 2000);
+            break;
+        
+        // もし相手のトーク数が4個の時に送信ボタンが押されたら、
+        // // chat配列の3（4個目）のランダム番目が返信
+        // case 4:
+        //     output(chat[3][Math.floor(Math.random() * chat[3].length)], 'other');
+        //     break;
+        
+        // // それ以降はやまびこ
+        // default:
+        //     output(inputText.value, 'other');
+        //     break;
+    }
+}
+
+output(chat[0], 'robot');
+
+setTimeout( ()=> {
+    output(chat[1], 'robot');
+}, 2000);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
