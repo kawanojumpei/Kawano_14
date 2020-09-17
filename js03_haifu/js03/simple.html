@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div>
+  <ul>
+    <li class ="imgs" data-img="0"><img src="imgs/buke.png" width="100"></li>
+    <li class ="imgs" data-img="1"><img src="imgs/tuku.jpg" width="100"></li>
+    <li class ="imgs" data-img="2"><img src="imgs/caram.png" width="100"></li>
+  </ul>
+</div>
+<!-- div>div*3でDivの中に3つのDivを作成可能 -->
+<div>
+    <div>名前：<input type="text" id="uname"></div>
+    <div>
+        <textarea id="text" cols="30" rows="10"></textarea>
+        <button id="send">送信</button><!-- button#sendでid名含めて作成可能 -->
+    </div>
+    <div id="output"></div>
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const ref = firebase.database().ref(); //.ref()ユニークキーを自動で振る。()の中に文字を入れると具体名でキーが組成。
+  let date = new Date();
+  function send(){
+      const uname = $("#uname").val();
+      const text = $("#text").val();
+      const datefin = 
+        date.getFullYear() + "年" + 
+		    (date.getMonth() + 1)  + "月" + 
+		    date.getDate() + "日" + 
+		    date.getHours() + "時" + 
+		    date.getMinutes() + "分" + 
+        date.getSeconds() + "秒";
+      const msg = {
+          uname:uname,
+          text:text,
+          time:datefin,
+          icon:d
+      }
+      ref.push(msg);//set=決まった名前、push=ユニーク
+  }
+
+//アイコン処理
+let d =0;
+const img = ["buke.png","tuku.jpg","caram.png"];
+$(".imgs").on("click",function(){
+  d = $(this).attr("data-img");
+})
+
+  //文字を送信。$().on()を先に書いてしまうのが良い。
+  $("#send").on("click",function(){
+      send();
+  });
+  //受信処理を記載
+  //child_addedは毎回1個、valueは毎回全てのデータを取得
+  ref.on("child_added",function(data){
+      const v = data.val(); //送信されたオブジェクトを取得
+      const k = data.key; //ユニークキーの取得
+      let h = '<p>'+v.uname+'<dt><img src="imgs/'+img[v.icon]+'" width="50"><br>'+v.time+'<br>'+v.text+'</p>';
+      
+      $("#output").append(h);
+      $('#output').scrollTop($('#output')[0].scrollHeight);
+  });
+
+  //イベント情報取得
+  $("#text").on("keydown",function(e){ //eはイベントのeの略
+    // console.log(e);
+    if(e.KeyCode===13){
+        send();
+  }});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
